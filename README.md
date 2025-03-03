@@ -14,7 +14,7 @@ The script which creates and updates the repository uses `wget` and `apt-ftparch
 
 # Instructions
 
-```
+```bash
 # Get this repository
 git clone https://github.com/confluence/crappy_zoom_debian_repo.git
 cd crappy_zoom_debian_repo
@@ -47,7 +47,7 @@ This repository is the bare minimum that works. It isn't authenticated. Since it
 
 Run the script again as root, and you should be able to upgrade.
 
-```
+```bash
 sudo /etc/cron.daily/updatezoomrepo.sh
 sudo apt-get update
 sudo apt-get install zoom
