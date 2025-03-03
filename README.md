@@ -39,7 +39,9 @@ sudo apt-get install zoom
 
 ## Daily? I don't want to download a 200M file daily!
 
-The script uses a horrible hack to determine whether the latest package on the server is newer than the package in the repo, without downloading the whole package. First it downloads only the header of the file (which is 132 bytes) and finds out the size of the control archive (the part of the file which stores the package metadata). Then it downloads the file only up to the end of that segment (about 30K at time of writing). Then it reads the package version from that metadata, and only if it's newer does it download the entire file and update the local repository.
+The script uses a horrible hack to determine whether the latest package on the server is newer than the package in the repo, without downloading the whole package. First it downloads only the header of the file and the header of the control archive (the first 132 bytes) and finds out the size of the control archive (the part of the package which stores the package metadata). Then it downloads the file only up to the end of the control archive data (about 30K at time of writing). Then it reads the package version from that metadata, and only if it's newer does it download the entire file and update the local repository.
+
+(I only figured out exactly *why* this worked after I got it to work. Here's a [nice diagram](https://en.wikipedia.org/wiki/File:Deb_File_Structure.svg) of what is inside a [`.deb` file](https://en.wikipedia.org/wiki/Deb_%28file_format%29), which is an [`ar` archive](https://en.wikipedia.org/wiki/Ar_%28Unix%29) under the hood.)
 
 ## Apt is printing some lines about InRelease and Release.gpg when I update
 
